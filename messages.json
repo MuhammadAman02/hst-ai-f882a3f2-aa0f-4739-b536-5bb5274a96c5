@@ -2,5 +2,9 @@
   {
     "role": "user",
     "content": "The deployment failed with the following error from Fly.io:\n\n{'#10 3.358 error during build:\\n#10 3.358 Could not resolve \"../components/Footer\" from \"src/pages/Index.tsx\"\\n#10 3.358 file: /app/src/pages/Index.tsx'}\n\nPlease fix the issue."
+  },
+  {
+    "role": "user",
+    "content": "The deployment failed with the following error from Fly.io:\n\n{'#10 2.273 error during build:\\n#10 2.273 [vite]: Rollup failed to resolve import \"@stripe/react-stripe-js\" from \"/app/src/components/StripePaymentForm.tsx\".\\n#10 2.273 This is most likely unintended because it can break your application at runtime.'}\n\nPlease fix the issue."
   }
 ]
