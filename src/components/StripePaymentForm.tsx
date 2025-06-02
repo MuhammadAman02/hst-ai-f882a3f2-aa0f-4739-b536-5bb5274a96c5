@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import stripePromise from '../lib/stripe';
+import StripeSetupGuide from './StripeSetupGuide';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -59,7 +60,7 @@ const CheckoutForm = () => {
         console.log('Payment method created successfully:', paymentMethod);
         toast({
           title: "Payment Successful!",
-          description: "Your payment has been processed successfully.",
+          description: "Your payment method has been created successfully. In a real app, this would be sent to your backend to complete the payment.",
         });
         
         // Here you would typically send the paymentMethod.id to your backend
@@ -145,6 +146,9 @@ const CheckoutForm = () => {
             <div className="border border-gray-300 rounded-lg p-4 bg-white">
               <CardElement options={cardElementOptions} />
             </div>
+            <p className="text-xs text-gray-500 mt-2">
+              Test card: 4242 4242 4242 4242 | Any future date | Any 3-digit CVC
+            </p>
           </div>
 
           {/* Submit Button */}
@@ -170,8 +174,12 @@ const CheckoutForm = () => {
 const StripePaymentForm = () => {
   console.log('Rendering StripePaymentForm wrapper');
   
+  const hasStripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY && 
+                      process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY !== 'pk_test_your_key_here';
+  
   return (
     <div className="max-w-2xl mx-auto">
+      {!hasStripeKey && <StripeSetupGuide />}
       <Elements stripe={stripePromise}>
         <CheckoutForm />
       </Elements>
